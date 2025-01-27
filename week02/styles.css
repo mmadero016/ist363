@@ -1,0 +1,34 @@
+.back {
+    background-color: #E38E49;
+}
+.body {
+    background-color: #D4EBF8;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: larger;
+}
+.h1 {
+    color: #0a3981;
+}
+.p{
+    margin-bottom: 20px;
+    font-size: large;
+}
+.bold{
+    color:#E38E49
+}
+.imgss {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 10px;
+    max-width: 450px; 
+    margin: 20px auto; 
+}
+.imgss img {
+    width: 200px; 
+    height: auto;
+}
