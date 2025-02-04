@@ -73,7 +73,7 @@ body {
     }
 
     input[type="submit"] {
-        background-color: $button-bg-color;
+        background-color: $buttoncolor;
         border: none;
         color: $white;
         padding: 10px;
@@ -82,7 +82,7 @@ body {
         transition: background-color 0.3s ease;
 
         &:hover {
-            background-color: $button-hover-color;
+            background-color: $hovercolor;
         }
     }
 }
