@@ -54,26 +54,13 @@ body {
 }
 
 /* Latest Recipes */
-.seconds {
+.seconds, .older-recipes {
   padding: 20px;
 }
-.seconds p {
-  font-size: 1.5em;
+.seconds p, .older-recipes p {
+  font-size: 2em;
   font-weight: bold;
   color: #B03A2E;
-}
-
-.firstphotos {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.firstphotos img {
-  width: 200px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Newsletter Section */
@@ -81,10 +68,9 @@ body {
   text-align: center;
   background-color: #DAF7A6;
   padding: 30px;
-  margin: 20px auto;
+  margin: 30px auto;
   border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
+  max-width: 100%;
 }
 .blurb .news img {
   width: 100px;
@@ -112,12 +98,12 @@ body {
   text-align: center;
   padding: 30px;
   background-color: #ffffff;
-  margin: 20px;
+  margin: 30px;
   border-radius: 10px;
 }
 .middle img {
   width: 100%;
-  max-width: 800px;
+  max-width: 100%;
   border-radius: 10px;
 }
 .middle h2 {
@@ -133,51 +119,45 @@ body {
   margin-top: 10px;
 }
 
-/* Older Recipes Section */
-.older-recipes {
-  text-align: center;
-  padding: 20px;
-}
-
-.recipe-grid {
+.recipe-grid, .firstphotos {
   display: flex;
-  justify-content: center;
+  justify-content: right;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.recipe-card {
+.recipe-card, .firstpic {
   background-color: #ffffff;
   border-radius: 10px;
   padding: 15px;
-  width: 200px;
+  width: 350px;
   text-align: center;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
-.recipe-card img {
+.recipe-card img, .firstpic img {
   width: 100%;
   border-radius: 10px;
 }
-.recipe-card p {
+.recipe-card p, .firstpic p {
   font-size: 1.2em;
   font-weight: bold;
   color: #B03A2E;
 }
 
 /* Footer */
-footer {
+.bottom {
   background-color: #48c9b0;
   color: #ffffff;
   text-align: center;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 40px;
+  margin-top: 40px;
 }
-footer nav ul {
+.bottom nav ul {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
-footer nav ul li {
+.bottom nav ul li {
   list-style: none;
   font-size: 1.2em;
   cursor: pointer;
