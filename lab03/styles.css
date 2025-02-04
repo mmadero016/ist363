@@ -1,0 +1,90 @@
+/* Mixin for centering content */
+/* Mixin for buttons */
+/* Resetting margins, padding, and box model to ensure consistency across browsers */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6; /* Adjusting line height for readability */
+}
+
+ul, ol {
+  list-style: none; /* Removing default list styles */
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #fff;
+  color: #000000;
+}
+
+h1 {
+  color: #ffffff;
+  font-size: 3em;
+}
+
+/* Main header section */
+.beginning {
+  background-color: #e89b6a;
+  padding: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+/* Recipe card grid */
+.recipe-grid {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.recipe-card {
+  width: 200px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  text-align: center;
+  margin: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Button styling */
+input[type=submit], .button {
+  background-color: #e67e22;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+input[type=submit]:hover, .button:hover {
+  background-color: #bf6516;
+}
+
+/* Footer styles */
+footer {
+  background-color: #48c9b0;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+footer nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+footer nav ul li {
+  list-style: none;
+  font-size: 1.2em;
+}/*# sourceMappingURL=styles.css.map */

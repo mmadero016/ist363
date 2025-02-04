@@ -1,0 +1,67 @@
+@import "partials/mixins.scss";
+@import "partials/reset.scss";
+@import "partials/variables.scss";
+@import "styles.css";
+
+
+body {
+    font-family: $main_font;
+    background-color: $white;    // White background for the page
+    color: $black;               // Text color
+}
+
+h1 {
+    color: $white; 
+    font-size: 3em;    // Applying heading color
+}
+
+/* Main header section */
+.beginning {
+    background-color: $orange;
+    padding: $padding;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+/* Recipe card grid */
+.recipe-grid {
+    display: flex;
+    justify-content: space-around;
+    margin: $margin;
+}
+
+.recipe-card {
+    width: 200px;
+    border: 1px solid #ddd;
+    padding: $padding;
+    text-align: center;
+    margin: $margin;
+    @include center-block;
+}
+
+/* Button styling */
+input[type="submit"], .button {
+    @include button-style($button-bg-color, white);
+}
+
+/* Footer styles */
+footer {
+    background-color: $footer-bg-color;
+    color: white;
+    padding: $padding;
+    text-align: center;
+}
+
+footer nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+footer nav ul li {
+    list-style: none;
+    font-size: 1.2em;
+}

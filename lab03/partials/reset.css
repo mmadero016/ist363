@@ -1,0 +1,14 @@
+/* Resetting margins, padding, and box model to ensure consistency across browsers */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6; /* Adjusting line height for readability */
+}
+
+ul, ol {
+  list-style: none; /* Removing default list styles */
+}/*# sourceMappingURL=reset.css.map */
