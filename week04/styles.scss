@@ -11,8 +11,8 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f8f8f8;
-    color: #000;
+    background-color: $white;
+    color: $black;
     line-height: 1.6;
 }
 
@@ -129,7 +129,7 @@ body {
     padding: 15px;
     width: 330px;
     text-align: center;
-    box-shadow: 2px 2px 5px #000;
+    box-shadow: 2px 2px 5px $black;
 
     img {
         width: 100%;
