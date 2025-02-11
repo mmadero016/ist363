@@ -120,16 +120,16 @@ body {
     display: flex;
     justify-content: right;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px;
 }
 
 .recipe-card , .firstpic {
     background-color: $white;
     border-radius: 10px;
     padding: 15px;
-    width: 350px;
+    width: 330px;
     text-align: center;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 5px #000;
 
     img {
         width: 100%;
