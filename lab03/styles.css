@@ -1,3 +1,4 @@
+/* Mixin for centering content */
 @import "styles.css";
 * {
   margin: 0;
@@ -6,11 +7,11 @@
 }
 
 body {
-  line-height: 1.6; 
+  line-height: 1.6;
 }
 
 ul, ol {
-  list-style: none; 
+  list-style: none;
 }
 
 * {
@@ -28,7 +29,7 @@ body {
 
 /* Header Styles */
 .beginning {
-  background-color: #E8A56E;
+  background-color: #e2625c;
   text-align: center;
   padding: 10px;
 }
@@ -63,7 +64,7 @@ body {
 /* Newsletter Section */
 .blurb {
   text-align: center;
-  background-color: #DAF7A6;
+  background-color: #e4fdc3;
   padding: 30px;
   margin: 30px auto;
   border-radius: 10px;
@@ -78,7 +79,7 @@ body {
   margin-top: 10px;
 }
 .blurb input[type=submit] {
-  background-color: #e67e22;
+  background-color: #e89b6a;
   border: none;
   color: #ffffff;
   padding: 10px;
@@ -90,7 +91,7 @@ body {
   background-color: #bf6516;
 }
 
-/* About Us*/
+/* About Us Section */
 .middle {
   text-align: center;
   padding: 30px;
@@ -108,7 +109,7 @@ body {
   color: #B03A2E;
 }
 .middle input[type=submit] {
-  background-color: #E8A56E;
+  background-color: #e2625c;
   color: #ffffff;
   border: none;
   padding: 10px 20px;
@@ -143,7 +144,7 @@ body {
 
 /* Footer */
 .bottom {
-  background-color: #48c9b0;
+  background-color: #8ae2c8;
   color: #ffffff;
   text-align: center;
   padding: 40px;
@@ -158,4 +159,4 @@ body {
   list-style: none;
   font-size: 1.2em;
   cursor: pointer;
-}
+}/*# sourceMappingURL=styles.css.map */
