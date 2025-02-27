@@ -1,4 +1,4 @@
-/*1*/ 
+/*01*/ 
 let myVar = 5;
 console.log("My variable value is " + myVar + " . ");
 
