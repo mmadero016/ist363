@@ -13,7 +13,7 @@ for (let i = 0; i < favoriteFoods.length; i++) {
     console.log("Favorite Food " + (i + 1) + ": " + favoriteFoods[i]);
 }
 
-/*4*/
+/*4!*/
 for (let i = 0; i < favoriteFoods.length; i++) {
     if (i === 1) {continue;} 
     console.log("Favorite Food " + (i + 1) + ": " + favoriteFoods[i]);
