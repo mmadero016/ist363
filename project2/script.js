@@ -1,14 +1,14 @@
-document.getElementById('weatherForm').addEventListener('submit', async function (e) {
+document.getElementById('auroraForm').addEventListener('submit', async function (e) {
   e.preventDefault();
   const city = document.getElementById('cityInput').value.trim();
   if (city !== '') {
-    await getWeather(city);
+    await getAuroraForecast(city);
   }
 });
 
-// getting dailyimg for pg
-
+// NASA Astronomy Picture of the Day (no changes)
 getNasaImage();
+
 async function getNasaImage() {
   try {
     const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
@@ -24,31 +24,66 @@ async function getNasaImage() {
   }
 }
 
-
-// v gets the weather depending on city
-async function getWeather(city) {
+// New: Aurora forecast based on city
+async function getAuroraForecast(city) {
   try {
-    const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
-    const geoData = await geo.json();
-    const loc = geoData.results[0];
+    // Step 1: Get user's latitude
+    const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+    const geoData = await geoRes.json();
+    const location = geoData.results[0];
+    const lat = location.latitude;
 
-    const lat = loc.latitude;
-    const lon = loc.longitude;
+    // Step 2: Simulate current Kp index fetch
+    const kpIndex = await getSimulatedKp(); // Returns 5–9 randomly (simulating real NOAA data)
 
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph`;
-
-    const res = await fetch(url);
-    const data = await res.json();
-    const weather = data.current_weather;
+    // Step 3: Compare lat vs kp threshold
+    const visibleLat = getAuroraVisibilityLat(kpIndex);
 
     const section = document.getElementById('weather-section');
     while (section.firstChild) section.removeChild(section.firstChild);
 
-    const card = makeWeatherCard(city, weather);
-    section.appendChild(card);
+    const result = document.createElement('div');
+    result.className = 'card p-3 text-center';
+
+    const message = document.createElement('h5');
+    message.textContent = 'Your Latitude: ' + lat.toFixed(2) + '°';
+
+    const kpInfo = document.createElement('p');
+    kpInfo.textContent = 'Current Kp Index: ' + kpIndex;
+
+    const visibility = document.createElement('p');
+    if (lat >= visibleLat) {
+      visibility.textContent = '✅ Aurora visibility is possible tonight!';
+    } else {
+      visibility.textContent = '❌ Aurora unlikely at your location.';
+    }
+
+    result.appendChild(message);
+    result.appendChild(kpInfo);
+    result.appendChild(visibility);
+    section.appendChild(result);
   } catch (err) {
-    console.log('Weather API error:', err);
+    console.log('Aurora forecast error:', err);
   }
+}
+
+// Simulate Kp index (normally you'd get this from a NOAA endpoint)
+function getSimulatedKp() {
+  const kp = Math.floor(Math.random() * 5) + 5; // Random between 5–9
+  return Promise.resolve(kp);
+}
+
+// Convert Kp index to latitude cutoff for aurora visibility
+function getAuroraVisibilityLat(kp) {
+  // Example mapping based on NOAA Kp visibility maps
+  const map = {
+    5: 66,
+    6: 62,
+    7: 58,
+    8: 53,
+    9: 48
+  };
+  return map[kp] || 66;
 }
 
 function makeNasaCard(data) {
@@ -69,30 +104,6 @@ function makeNasaCard(data) {
   card.appendChild(img);
   card.appendChild(title);
   card.appendChild(desc);
-
-  return card;
-}
-
-function makeWeatherCard(city, weather) {
-  const card = document.createElement('div');
-  card.className = 'text-center';
-
-  const cityName = document.createElement('h5');
-  cityName.textContent = 'Weather in ' + city;
-
-  const temp = document.createElement('p');
-  temp.textContent = 'Temperature: ' + weather.temperature + '°F';
-
-  const wind = document.createElement('p');
-  wind.textContent = 'Wind Speed: ' + weather.windspeed + ' mph';
-
-  const code = document.createElement('p');
-  code.textContent = 'Weather Code: ' + weather.weathercode;
-
-  card.appendChild(cityName);
-  card.appendChild(temp);
-  card.appendChild(wind);
-  card.appendChild(code);
 
   return card;
 }
