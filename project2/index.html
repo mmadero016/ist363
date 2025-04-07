@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space + Weather</title>
+    <link href="../project/node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <header class="bg-dark text-white text-center py-4">
+    <h1>Space + Weather: All at Once</h1>
+    <nav>
+      <a href="#" class="text-white mx-2">Home</a>
+      <a href="#" class="text-white mx-2">Explore</a>
+    </nav>
+  </header>
+
+  <main class="container my-4">
+    <form id="weatherForm" class="text-center mb-4">
+      <label for="cityInput" class="form-label">Enter a City</label>
+      <input type="text" id="cityInput" class="form-control d-inline w-auto mx-2" placeholder="e.g. New York" required />
+      <button type="submit" class="btn btn-primary">Get Weather</button>
+    </form>
+
+    <section class="mb-5">
+      <h2>NASA Astronomy Picture of the Day</h2>
+      <div id="nasa-section" class="card p-3"></div>
+    </section>
+
+    <section>
+      <h2>Current Weather</h2>
+      <div id="weather-section" class="card p-3"></div>
+    </section>
+  </main>
+
+  <footer class="bg-light text-center py-5 mt-5">Maria Madero | IST 363 Project 2</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

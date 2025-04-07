@@ -4,7 +4,7 @@ const request = new XMLHttpRequest();
 
 request.addEventListener('readystatechange', () => {
     if (request.readyState === 4 && request.status === 200) {
-        // Parse the JSON response
+
         const data = JSON.parse(request.responseText);
 
         const temperature = data.current.temperature_2m;
