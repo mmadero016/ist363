@@ -24,18 +24,15 @@ async function getNasaImage() {
   }
 }
 
-// this is where aurora 
+// Aurora forecast logic
 async function getAuroraForecast(city) {
   try {
-   //lat
     const geoRes = await fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + city);
     const geoData = await geoRes.json();
     const location = geoData.results[0];
     const lat = location.latitude;
 
-    const kpIndex = await getSimulatedKp(); 
-
- // for threshold
+    const kpIndex = await getSimulatedKp();
     const visibleLat = getAuroraVisibilityLat(kpIndex);
 
     const section = document.getElementById('weather-section');
@@ -52,7 +49,7 @@ async function getAuroraForecast(city) {
 
     const visibility = document.createElement('p');
     if (lat >= visibleLat) {
-      visibility.textContent = '✅ Aurora visibility is possible tonight! ';
+      visibility.textContent = '✅ Aurora visibility is possible tonight!';
     } else {
       visibility.textContent = '❌ Aurora unlikely at your location :(';
     }
@@ -66,11 +63,12 @@ async function getAuroraForecast(city) {
   }
 }
 
-// kp index
 function getSimulatedKp() {
-  const kp = Math.floor(Math.random() * 5) + 5; 
+  const kp = Math.floor(Math.random() * 5) + 5;
   return Promise.resolve(kp);
 }
+
+// minimum latitude for aurora visibility
 function getAuroraVisibilityLat(kp) {
   const map = {
     5: 66,
@@ -82,14 +80,24 @@ function getAuroraVisibilityLat(kp) {
   return map[kp] || 66;
 }
 
+// video potential
 function makeNasaCard(data) {
   const card = document.createElement('div');
   card.className = 'text-center';
 
-  const img = document.createElement('img');
-  img.src = data.url;
-  img.alt = data.title;
-  img.className = 'img-fluid mb-3';
+  if (data.media_type === 'image') {
+    const img = document.createElement('img');
+    img.src = data.url;
+    img.alt = data.title;
+    img.className = 'img-fluid mb-3';
+    card.appendChild(img);
+  } else if (data.media_type === 'video') {
+    const link = document.createElement('a');
+    link.href = data.url;
+    link.target = '_blank';
+    link.textContent = 'Click here to watch today’s NASA video';
+    card.appendChild(link);
+  }
 
   const title = document.createElement('h5');
   title.textContent = data.title;
@@ -97,7 +105,6 @@ function makeNasaCard(data) {
   const desc = document.createElement('p');
   desc.textContent = data.explanation;
 
-  card.appendChild(img);
   card.appendChild(title);
   card.appendChild(desc);
 
