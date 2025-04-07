@@ -6,7 +6,7 @@ document.getElementById('auroraForm').addEventListener('submit', async function 
   }
 });
 
-// nasa pic of day 
+// nasa pic of day here
 getNasaImage();
 
 async function getNasaImage() {
