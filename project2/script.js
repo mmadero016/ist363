@@ -6,12 +6,12 @@ document.getElementById('auroraForm').addEventListener('submit', async function 
   }
 });
 
-// nasa pic of day here
+// nasa pic of day below
 getNasaImage();
 
 async function getNasaImage() {
   try {
-    const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+    const res = await fetch('https://api.nasa.gov/planetary/apod?api_key=nOpIMvzL0zRCAOZTdgV9gaX5c4SYs8gAZ7yTb7Kc');
     const data = await res.json();
 
     const section = document.getElementById('nasa-section');
