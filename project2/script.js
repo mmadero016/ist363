@@ -49,9 +49,9 @@ async function getAuroraForecast(city) {
 
     const visibility = document.createElement('p');
     if (lat >= visibleLat) {
-      visibility.textContent = '✅ Aurora visibility is possible tonight!';
+      visibility.textContent = 'Aurora visibility is possible tonight! Take some pictures :)';
     } else {
-      visibility.textContent = '❌ Aurora unlikely at your location :(';
+      visibility.textContent = 'Aurora unlikely at your location :(';
     }
 
     result.appendChild(message);
