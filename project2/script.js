@@ -6,7 +6,7 @@ document.getElementById('auroraForm').addEventListener('submit', async function 
   }
 });
 
-// NASA Astronomy Picture of the Day (no changes)
+// nasa pic of day 
 getNasaImage();
 
 async function getNasaImage() {
@@ -24,19 +24,18 @@ async function getNasaImage() {
   }
 }
 
-// New: Aurora forecast based on city
+// this is where aurora 
 async function getAuroraForecast(city) {
   try {
-    // Step 1: Get user's latitude
-    const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+   //lat
+    const geoRes = await fetch('https://geocoding-api.open-meteo.com/v1/search?name=' + city);
     const geoData = await geoRes.json();
     const location = geoData.results[0];
     const lat = location.latitude;
 
-    // Step 2: Simulate current Kp index fetch
-    const kpIndex = await getSimulatedKp(); // Returns 5–9 randomly (simulating real NOAA data)
+    const kpIndex = await getSimulatedKp(); 
 
-    // Step 3: Compare lat vs kp threshold
+ // for threshold
     const visibleLat = getAuroraVisibilityLat(kpIndex);
 
     const section = document.getElementById('weather-section');
@@ -53,9 +52,9 @@ async function getAuroraForecast(city) {
 
     const visibility = document.createElement('p');
     if (lat >= visibleLat) {
-      visibility.textContent = '✅ Aurora visibility is possible tonight!';
+      visibility.textContent = '✅ Aurora visibility is possible tonight! ';
     } else {
-      visibility.textContent = '❌ Aurora unlikely at your location.';
+      visibility.textContent = '❌ Aurora unlikely at your location :(';
     }
 
     result.appendChild(message);
@@ -67,15 +66,12 @@ async function getAuroraForecast(city) {
   }
 }
 
-// Simulate Kp index (normally you'd get this from a NOAA endpoint)
+// kp index
 function getSimulatedKp() {
-  const kp = Math.floor(Math.random() * 5) + 5; // Random between 5–9
+  const kp = Math.floor(Math.random() * 5) + 5; 
   return Promise.resolve(kp);
 }
-
-// Convert Kp index to latitude cutoff for aurora visibility
 function getAuroraVisibilityLat(kp) {
-  // Example mapping based on NOAA Kp visibility maps
   const map = {
     5: 66,
     6: 62,
