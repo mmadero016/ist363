@@ -14,6 +14,56 @@
 #texty {
     font-family: "Parkinsans", sans-serif;
     font-optical-sizing: auto;
-    font-weight: <weight>;
+    font-weight: <input>;
     font-style: normal;
   }
+
+
+#maintext {
+    font-family: "Parkinsans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: lighter;
+    font-style: normal;
+}
+
+  .btn-success {
+    background-color: #a22f01;
+    border: none;
+  }
+
+  .breed-img {
+    border-radius: 8px;
+    transition: 0.3s ease;
+    box-shadow: 0 0 0 transparent;
+  }
+  
+  .breed-img:hover {
+    box-shadow: 0 0 15px rgba(255, 166, 0, 0.8);
+    transform: scale(1.02);
+    cursor: pointer;
+  }
+  
+  .breed-card p {
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+  
+  .form-check-input {
+    accent-color: gray; /* light gray dot inside */
+    width: 20px;
+    height: 20px;
+  }
+  
+  .form-check-label {
+    font-weight: 500;
+    margin-left: 5px;
+  }
+  
+  body {
+    cursor: url('images/paww.png'), auto;
+  }
+  
+  a:hover {
+    cursor: url("images/clearpaw.png"), pointer;
+  }
+  
