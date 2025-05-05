@@ -1,15 +1,19 @@
 import React from 'react';
+import logo from '../3images/ERY.png';
 
 export default function Navbar() {
   return (
-    <nav
-      className="navbar px-4 py-3"
-      style={{ backgroundColor: '#d57d64' }} // <- match your original color
-    >
-      <div className="container-fluid">
-        <h1 className="navbar-brand bg-dark text-white fw-bold m-0" style={{ fontFamily: 'Margarine, sans-serif' }}>
-          WaddlePup
-        </h1>
+    <nav className="navbar py-3" style={{ backgroundColor: '#D98664' }}>
+      <div className="container d-flex justify-content-center">
+      <img
+          src={logo}
+          alt="WaddlePup logo"
+          style={{
+            height: '60px',
+            transform: 'scale(1.8)',
+            transformOrigin: 'center',
+          }}
+        />
       </div>
     </nav>
   );

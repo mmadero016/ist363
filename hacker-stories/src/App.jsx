@@ -9,7 +9,8 @@ import Navbar from './proj3/navbar.jsx';
 
 function App() {
   return (
-    <main className="mt-5 pt-5 mb-5">
+    <main className="mb-5">
+      <Navbar />
       <WhyWaddlePup />
       <hr className="w-75 mx-auto my-5" />
       <BreedGrid />
