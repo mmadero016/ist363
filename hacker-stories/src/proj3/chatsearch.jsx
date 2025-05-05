@@ -1,41 +1,81 @@
+import React, { useState } from 'react';
+import { findPets } from './petfinder';
+import FilteredMatches from './filteredmatches';
+
 export default function ChatSearch() {
-    return (
-      <section className="contact-section py-5 bg-light">
-        <div className="container">
-          <div className="mx-auto" style={{ maxWidth: '700px' }}>
-            <h2 className="fw-bold mb-4 text-decoration-underline">Connect & Chat</h2>
-  
-            <form>
-              <div className="mb-3">
-                <label>Pet Name:</label>
-                <input type="text" className="form-control" placeholder="e.g. Bambi" />
-              </div>
-              <div className="mb-3">
-                <label>Breed:</label>
-                <input type="text" className="form-control" placeholder="e.g. Shiba Inu" />
-              </div>
-              <div className="mb-3">
-                <label>Age:</label>
-                <input type="number" className="form-control" placeholder="e.g. 3" />
-              </div>
-              <div className="mb-3">
-                <label>Medical Conditions:</label>
-                <select className="form-select">
-                  <option>None</option>
-                  <option>Heart Murmur</option>
-                  <option>Epilepsy</option>
-                </select>
-              </div>
-              <div className="mb-3">
-                <label>Keywords (for matching):</label>
-                <input type="text" className="form-control" placeholder="e.g. energetic, playful" />
-              </div>
-  
-              <button type="submit" className="btn btn-success w-100">Find Matches</button>
-            </form>
-          </div>
-        </div>
-      </section>
-    );
+  const [form, setForm] = useState({
+    breed: '',
+    age: '',
+    medical: '',
+    keywords: '',
+  });
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
   }
-  
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      const results = await findPets(form.breed, form.age, form.keywords, form.medical);
+      setMatches(results);
+    } catch (err) {
+      console.error(err);
+      setError('Could not fetch pets. Try again.');
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <div className="container my-5">
+      <h2><u>Connect & Chat</u></h2>
+      <form onSubmit={handleSubmit}>
+        <label>Breed:</label>
+        <input
+          type="text"
+          name="breed"
+          className="form-control"
+          placeholder="e.g. Shiba Inu"
+          onChange={handleChange}
+        />
+
+        <label>Age:</label>
+        <input
+          type="text"
+          name="age"
+          className="form-control"
+          placeholder="e.g. 3"
+          onChange={handleChange}
+        />
+
+        <label>Medical Conditions:</label>
+        <select name="medical" className="form-control" onChange={handleChange}>
+          <option value="">None</option>
+          <option value="blind">Blind</option>
+          <option value="deaf">Deaf</option>
+        </select>
+
+        <label>Keywords (for matching):</label>
+        <input
+          type="text"
+          name="keywords"
+          className="form-control"
+          placeholder="e.g. energetic, playful"
+          onChange={handleChange}
+        />
+
+        <button className="btn btn-success mt-3" type="submit">Find Matches</button>
+      </form>
+
+      {loading && <p className="mt-3">Loading...</p>}
+      {error && <p className="text-danger mt-3">{error}</p>}
+      {matches.length > 0 && <FilteredMatches results={matches} />}
+    </div>
+  );
+}

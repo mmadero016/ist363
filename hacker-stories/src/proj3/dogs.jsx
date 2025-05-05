@@ -1,82 +1,66 @@
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const breeds = [
-  "Shiba Inu", "Corgi", "Labrador", "Beagle", "Husky", "Pomeranian", "Poodle", "Golden Retriever",
-  "Chihuahua", "Dachshund", "Pug", "Border Collie", "Akita", "Doberman", "Pitbull", "Maltese"
-]
+    'Shiba Inu', 'Corgi', 'Labrador', 'Beagle',
+    'Husky', 'Pomeranian', 'Poodle',
+    'Golden Retriever', 'Chihuahua', 'Doberman', 'Pitbull'
+  ];
+  
 
-// manual mapping from breed name to image file
-const breedToImage = {
-  "Shiba Inu": "shiba.png",
-  "Corgi": "corgi.png",
-  "Labrador": "lab.png",
-  "Beagle": "beagle.png",
-  "Husky": "husky.png",
-  "Pomeranian": "pom.png", 
-  "Poodle": "poodle.png",
-  "Golden Retriever": "golden.png",
-  "Chihuahua": "chihuahau.png",
-  "Dachshund": "hotdog.png",
-  "Pug": "pug.png",
-  "Border Collie": "border.png",
-  "Akita": "akita.png",
-  "Doberman": "doberman.png",
-  "Pitbull": "pitb.png",
-  "Maltese": "maltese.png"
-};
-
-export default function DogName() {
-  const [visited, setVisited] = useState([]);
-
-  useEffect(() => {
-    const seen = JSON.parse(localStorage.getItem('visitedBreeds')) || [];
-    setVisited(seen);
-  }, []);
-
+export default function BreedGrid() {
+  const navigate = useNavigate();
+  const [viewed, setViewed] = useState(() => {
+    if (performance.navigation.type === 1) return []; // full refresh
+    return JSON.parse(sessionStorage.getItem('viewedBreeds')) || [];
+  });
+  
+  const handleClick = (breed) => {
+    const updated = [...viewed, breed];
+    setViewed(updated);
+    sessionStorage.setItem('viewedBreeds', JSON.stringify(updated));
+    window.location.href = `/ist363/hacker-stories/breeds/${breed.toLowerCase().replaceAll(' ', '-')}.html`;
+  };
+  
   return (
-    <section className="text-center my-5">
-      <h2 className="fw-bold">Breeds on WaddlePup</h2>
-      <p className="mb-4">A community so big: here are the pups that have joined us!</p>
-      <div className="container">
-        <div className="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
-          {breeds.map((breed) => {
-                const imgPath = new URL(`../3images/breeds/${breedToImage[breed]}`, import.meta.url).href;
-                const isVisited = visited.includes(breed);
-
-            return (
-              <div className="col text-center" key={breed}>
-                <Link to={`/breeds/${breed.toLowerCase().replaceAll(' ', '-')}`} className="text-decoration-none text-dark">
-                  <div style={{ position: 'relative' }}>
-                    <img
-                    src={imgPath}
-                    alt={breed}
-                    className="img-fluid"
-                    style={{ maxHeight: "160px", borderRadius: "10px" }}
-                    />
-
-                    {isVisited && (
-                      <span style={{
-                        position: 'absolute',
-                        top: 5,
-                        right: 5,
-                        backgroundColor: 'gold',
-                        padding: '2px 6px',
-                        fontSize: '0.8rem',
-                        borderRadius: '5px'
-                      }}>
-                        Visited
-                      </span>
-                    )}
-                  </div>
-                  <p className="fw-bold mt-2">{breed}</p>
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+    <div className="text-center my-5">
+      <h2>Breeds on WaddlePup</h2>
+      <p>A community so big: here are the pups that have joined us!</p>
+      <div className="row justify-content-center">
+        {breeds.map((breed) => (
+          <div
+            key={breed}
+            className="card m-3"
+            style={{ width: '200px', cursor: 'pointer', position: 'relative' }}
+            onClick={() => handleClick(breed)}
+          >
+            {viewed.includes(breed) && (
+              <span
+                style={{
+                  position: 'absolute',
+                  top: '5px',
+                  left: '5px',
+                  backgroundColor: 'gold',
+                  padding: '2px 6px',
+                  fontSize: '0.75rem',
+                  borderRadius: '4px',
+                }}
+              >
+                Viewed
+              </span>
+            )}
+            <img
+            src={`images/breeds/${breed.toLowerCase().replaceAll(' ', '')}.png`}
+            alt={breed}
+              className="card-img-top"
+              style={{ height: '200px', objectFit: 'cover' }}
+            />
+            <div className="card-body text-center">
+              <h5 className="card-title">{breed}</h5>
+            </div>
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   );
 }
