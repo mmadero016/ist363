@@ -7,7 +7,6 @@ const breeds = [
     'Golden Retriever', 'Chihuahua', 'Doberman', 'Pitbull'
   ];
   
-
 export default function BreedGrid() {
   const navigate = useNavigate();
   const [viewed, setViewed] = useState(() => {
