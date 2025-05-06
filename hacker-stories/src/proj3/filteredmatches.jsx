@@ -4,19 +4,26 @@ import { findPets } from './petfinder';
 
 export default function FilteredMatches() {
   const { state } = useLocation();
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [results, setResults] = useState(state?.results || []);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    async function fetch() {
-      const data = await findPets(state.breed, state.age, state.keywords);
-      setResults(data);
-      setLoading(false);
+    // if no results were passed, show nothing or fallback message
+    if (!state || !state.results) {
+      setResults([]);
     }
-    fetch();
   }, [state]);
 
   if (loading) return <p className="text-center">Loading results...</p>;
+
+  if (!results.length) {
+    return (
+      <div className="container my-5">
+        <h2>No matches found</h2>
+        <p>Please try a different search.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="container my-5">
@@ -25,10 +32,14 @@ export default function FilteredMatches() {
         {results.map((pet) => (
           <div key={pet.id} className="col-md-4 mb-4">
             <div className="card">
-              <img src={pet.photos[0]?.medium || ''} className="card-img-top" alt={pet.name} />
+              <img
+                src={pet.photos?.[0]?.medium || ''}
+                className="card-img-top"
+                alt={pet.name}
+              />
               <div className="card-body">
                 <h5 className="card-title">{pet.name}</h5>
-                <p>{pet.age} • {pet.breeds.primary}</p>
+                <p>{pet.age} • {pet.breeds?.primary}</p>
               </div>
             </div>
           </div>

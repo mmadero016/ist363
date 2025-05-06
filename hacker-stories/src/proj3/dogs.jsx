@@ -7,19 +7,27 @@ const breeds = [
     'Golden Retriever', 'Chihuahua', 'Doberman', 'Pitbull'
   ];
   
-export default function BreedGrid() {
+export default function DogGrid() {
   const navigate = useNavigate();
   const [viewed, setViewed] = useState(() => {
     if (performance.navigation.type === 1) return []; // full refresh
     return JSON.parse(sessionStorage.getItem('viewedBreeds')) || [];
   });
+
+  useEffect(() => {
+    const stored = JSON.parse(sessionStorage.getItem('viewedBreeds')) || [];
+    setViewed(stored);
+  }, []);
+  
+
   
   const handleClick = (breed) => {
     const updated = [...viewed, breed];
     setViewed(updated);
     sessionStorage.setItem('viewedBreeds', JSON.stringify(updated));
-    window.location.href = `/ist363/hacker-stories/breeds/${breed.toLowerCase().replaceAll(' ', '-')}.html`;
+    navigate(`/breeds/${breed.toLowerCase().replaceAll(' ', '-')}`);
   };
+  
   
   return (
     <div className="text-center my-5">

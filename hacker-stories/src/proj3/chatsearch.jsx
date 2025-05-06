@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { findPets } from './petfinder';
 import FilteredMatches from './filteredmatches';
+import { useNavigate } from 'react-router-dom'; // ← Add this at the top if missing
 
 export default function ChatSearch() {
   const [form, setForm] = useState({
@@ -13,9 +14,12 @@ export default function ChatSearch() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,10 +27,19 @@ export default function ChatSearch() {
     setError('');
     try {
       const results = await findPets(form.breed, form.age, form.keywords, form.medical);
-      setMatches(results);
+
+      navigate('/matches', {
+        state: {
+          results,
+          breed: form.breed,
+          age: form.age,
+          keywords: form.keywords,
+          medical: form.medical
+        }
+      });
     } catch (err) {
       console.error(err);
-      setError('Could not fetch pets. Try again.');
+      setError('Something went wrong.');
     } finally {
       setLoading(false);
     }
@@ -46,13 +59,14 @@ export default function ChatSearch() {
         />
 
         <label>Age:</label>
-        <input
-          type="text"
-          name="age"
-          className="form-control"
-          placeholder="e.g. 3"
-          onChange={handleChange}
-        />
+        <select name="age" className="form-control" onChange={handleChange}>
+          <option value="">Select age group</option>
+          <option value="Baby">Baby</option>
+          <option value="Young">Young</option>
+          <option value="Adult">Adult</option>
+          <option value="Senior">Senior</option>
+        </select>
+
 
         <label>Medical Conditions:</label>
         <select name="medical" className="form-control" onChange={handleChange}>
@@ -78,4 +92,5 @@ export default function ChatSearch() {
       {matches.length > 0 && <FilteredMatches results={matches} />}
     </div>
   );
-}
+  }
+
