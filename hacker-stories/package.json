@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://mmadero016.github.io/hacker-stories",
+  "homepage": "https://mmadero016.github.io/ist363/hacker-stories",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
