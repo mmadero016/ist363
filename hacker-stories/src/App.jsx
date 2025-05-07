@@ -13,11 +13,6 @@ import BreedDesc from './proj3/breeddesc.jsx';
 import FilteredMatches from './proj3/filteredmatches';
 
 
-
-import ShibaInu from './proj3/shiba.jsx';
-// You can add more breed imports here like:
-// import Corgi from './proj3/corgi.jsx';
-
 function App() {
   return (
     <Router>
