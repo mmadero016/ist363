@@ -34,7 +34,7 @@ function App() {
           }
         />
        <Route path="/breeds/:breed" element={<BreedDesc />} />
-       <Route path="/matches" element={<FilteredMatches />} /> {/* ✅ Add this */}
+       <Route path="/matches" element={<FilteredMatches />} /> 
        
       </Routes>
 
